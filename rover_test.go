@@ -126,39 +126,41 @@ func TestSuccessfullyMoveRoverWithCommandGoingWest(t *testing.T){
 func TestUnsuccessfullyMoveRoverWithCommandGoingNorth(t *testing.T){ 
     coordinate := Coordinate{
 		xPos: 4,
-		yPos: 3,
+		yPos: 4,
 	}
 
 	rover, _ := CreateRover(coordinate)
     err := rover.ExecuteDirectionCommand("N")
 
-    require.Nil(t, err)
+    require.NotNil(t, err)
 }
 
 func TestUnsuccessfullyMoveRoverWithCommandGoingSouth(t *testing.T){ 
     coordinate := Coordinate{
 		xPos: 0,
-		yPos: 4,
+		yPos: 0,
 	}
 
 	rover, _ := CreateRover(coordinate)
     err := rover.ExecuteDirectionCommand("S")
     
-    require.Nil(t, err)
+    require.NotNil(t, err)
 }
 
-func TestUnsuccessfullyMoveRoverWithCommandGoingEast(t *testing.T){ coordinate := Coordinate{
-		xPos: 0,
+func TestUnsuccessfullyMoveRoverWithCommandGoingEast(t *testing.T){ 
+    coordinate := Coordinate{
+		xPos: 4,
 		yPos: 4,
 	}
 
 	rover, _ := CreateRover(coordinate)
     err := rover.ExecuteDirectionCommand("E")
 
-    require.Nil(t, err)
+    require.NotNil(t, err)
 }
 
-func TestunSuccessfullyMoveRoverWithCommandGoingWest(t *testing.T){ coordinate := Coordinate{
+func TestUnsuccessfullyMoveRoverWithCommandGoingWest(t *testing.T){ 
+    coordinate := Coordinate{
 		xPos: 0,
 		yPos: 3,
 	}
@@ -166,5 +168,5 @@ func TestunSuccessfullyMoveRoverWithCommandGoingWest(t *testing.T){ coordinate :
 	rover, _ := CreateRover(coordinate)
     err := rover.ExecuteDirectionCommand("W")
 
-    require.Nil(t, err)
+    require.NotNil(t, err)
 }
