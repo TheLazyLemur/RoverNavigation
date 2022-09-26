@@ -6,6 +6,7 @@ import (
 )
 
 var roverOutOfBounds = errors.New("Rover went out of bounds")
+var commandIsNotValid = errors.New("Command is not valid")
 
 type Coordinate struct {
 	xPos int32
@@ -44,6 +45,11 @@ func (rover *Rover) ExecuteCommand(commandString string) error {
 }
 
 func (rover *Rover) ExecuteDirectionCommand(command string) error {
+    err := validateCommand(command)
+    if err != nil {
+        return err
+    }
+
 	if command == "N" {
 		rover.yPos += 1
 	}
@@ -71,4 +77,23 @@ func (rover *Rover) ExecuteDirectionCommand(command string) error {
 
 	rover.visited = append(rover.visited, newCoordinate)
 	return nil
+}
+
+func validateCommand(command string) error{
+    allowed := []string{"N", "S", "W", "E"}
+    isValid := contains(allowed, command)
+    if !isValid {
+        return commandIsNotValid
+    }
+
+    return nil
+}
+
+func contains(arr []string, str string) bool {
+   for _, a := range arr {
+      if a == str {
+         return true
+      }
+   }
+   return false
 }
